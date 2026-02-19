@@ -1,81 +1,115 @@
-# Intercom
+# DIG MULTISIG
 
-This repository is a reference implementation of the **Intercom** stack on Trac Network for an **internet of agents**.
+A hardened CLI-based multi-signature transaction manager built on Intercom architecture.
 
-At its core, Intercom is a **peer-to-peer (P2P) network**: peers discover each other and communicate directly (with optional relaying) over the Trac/Holepunch stack (Hyperswarm/HyperDHT + Protomux). There is no central server required for sidechannel messaging.
+DIG MULTISIG is designed to simulate secure multi-party transaction approval workflows with a strong structured command engine and execution proof included.
 
-Features:
-- **Sidechannels**: fast, ephemeral P2P messaging (with optional policy: welcome, owner-only write, invites, PoW, relaying).
-- **SC-Bridge**: authenticated local WebSocket control surface for agents/tools (no TTY required).
-- **Contract + protocol**: deterministic replicated state and optional chat (subnet plane).
-- **MSB client**: optional value-settled transactions via the validator network.
+---
 
-Additional references: https://www.moltbook.com/post/9ddd5a47-4e8d-4f01-9908-774669a11c21 and moltbook m/intercom
+## Core Capabilities
 
-For full, agent‑oriented instructions and operational guidance, **start with `SKILL.md`**.  
-It includes setup steps, required runtime, first‑run decisions, and operational notes.
+- Create multi-signature transaction
+- Add signer to transaction
+- Approve transaction
+- Check transaction status
+- Secure execution flow simulation
+- Clean CLI structured interface
+- Execution record included
 
-## Awesome Intercom
+---
 
-For a curated list of agentic Intercom apps check out: https://github.com/Trac-Systems/awesome-intercom
+## Command Structure
 
-## What this repo is for
-- A working, pinned example to bootstrap agents and peers onto Trac Network.
-- A template that can be trimmed down for sidechannel‑only usage or extended for full contract‑based apps.
+Available cmd:
 
-## How to use
-Use the **Pear runtime only** (never native node).  
-Follow the steps in `SKILL.md` to install dependencies, run the admin peer, and join peers correctly.
+- create-tx
+- add-signer
+- approve
+- status
+- exit
 
-## Architecture (ASCII map)
-Intercom is a single long-running Pear process that participates in three distinct networking "planes":
-- **Subnet plane**: deterministic state replication (Autobase/Hyperbee over Hyperswarm/Protomux).
-- **Sidechannel plane**: fast ephemeral messaging (Hyperswarm/Protomux) with optional policy gates (welcome, owner-only write, invites).
-- **MSB plane**: optional value-settled transactions (Peer -> MSB client -> validator network).
+---
 
-```text
-                          Pear runtime (mandatory)
-                pear run . --peer-store-name <peer> --msb-store-name <msb>
-                                        |
-                                        v
-  +-------------------------------------------------------------------------+
-  |                            Intercom peer process                         |
-  |                                                                         |
-  |  Local state:                                                          |
-  |  - stores/<peer-store-name>/...   (peer identity, subnet state, etc)    |
-  |  - stores/<msb-store-name>/...    (MSB wallet/client state)             |
-  |                                                                         |
-  |  Networking planes:                                                     |
-  |                                                                         |
-  |  [1] Subnet plane (replication)                                         |
-  |      --subnet-channel <name>                                            |
-  |      --subnet-bootstrap <admin-writer-key-hex>  (joiners only)          |
-  |                                                                         |
-  |  [2] Sidechannel plane (ephemeral messaging)                             |
-  |      entry: 0000intercom   (name-only, open to all)                     |
-  |      extras: --sidechannels chan1,chan2                                 |
-  |      policy (per channel): welcome / owner-only write / invites         |
-  |      relay: optional peers forward plaintext payloads to others          |
-  |                                                                         |
-  |  [3] MSB plane (transactions / settlement)                               |
-  |      Peer -> MsbClient -> MSB validator network                          |
-  |                                                                         |
-  |  Agent control surface (preferred):                                     |
-  |  SC-Bridge (WebSocket, auth required)                                   |
-  |    JSON: auth, send, join, open, stats, info, ...                       |
-  +------------------------------+------------------------------+-----------+
-                                 |                              |
-                                 | SC-Bridge (ws://host:port)   | P2P (Hyperswarm)
-                                 v                              v
-                       +-----------------+            +-----------------------+
-                       | Agent / tooling |            | Other peers (P2P)     |
-                       | (no TTY needed) |<---------->| subnet + sidechannels |
-                       +-----------------+            +-----------------------+
+## Execution Flow
 
-  Optional for local testing:
-  - --dht-bootstrap "<host:port,host:port>" overrides the peer's HyperDHT bootstraps
-    (all peers that should discover each other must use the same list).
+1. Create transaction
+2. Add required signers
+3. Approve transaction
+4. Verify approval threshold
+5. Confirm transaction state
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/carlodiganio-sketch/dig-multisig
+cd dig-multisig
+npm install
+node index.js
 ```
 
 ---
-If you plan to build your own app, study the existing contract/protocol and remove example logic as needed (see `SKILL.md`).
+
+## Architecture Overview
+
+DIG MULTISIG demonstrates:
+
+- Multi-party validation logic
+- Threshold-based approval simulation
+- Transaction state management
+- Modular CLI command engine
+- Intercom-based extension framework
+
+---
+
+## Project Structure
+
+```
+dig-multisig/
+│
+├── index.js
+├── package.json
+├── proof/
+│   └── proof-record.mp4
+├── README.md
+└── SKILL.md
+```
+
+---
+
+## Proof Record Execution
+
+This repository includes a recorded execution showing:
+
+- Transaction creation
+- Signer addition
+- Approval flow
+- Status verification
+- Full CLI interaction
+
+Video file:
+
+```
+proof/proof-record.mp4
+```
+
+---
+
+## Trac Wallet
+
+```
+trac1eh6v8scc09wn9cka4t0gjqpgwnwqdml26tpqt6gskasg6dk2tn5q6xdljp
+```
+
+---
+
+## Intercom Reference
+
+This project is built as a modified fork of the Intercom stack and demonstrates custom CLI extension, command restructuring, and workflow simulation.
+
+---
+
+## Status
+
+Active fork with structural modifications and execution proof included.

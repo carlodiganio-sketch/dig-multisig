@@ -22,5 +22,20 @@
   },
   "overrides": {
     "trac-wallet": "1.0.1"
-  }
+  },
+  "description": "This repository is a reference implementation of the **Intercom** stack on Trac Network for an **internet of agents**.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlodiganio-sketch/dig-multisig.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlodiganio-sketch/dig-multisig/issues"
+  },
+  "homepage": "https://github.com/carlodiganio-sketch/dig-multisig#readme"
 }

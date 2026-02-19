@@ -90,9 +90,7 @@ This repository includes a recorded execution showing:
 
 Video file:
 
-```
-proof/proof-record.mp4
-```
+[▶ Watch Execution Record](./proof/proof-record.mp4)
 
 ---
 
